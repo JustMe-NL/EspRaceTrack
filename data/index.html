@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Durans Speedway</title>
+    <link href='main.css' rel='stylesheet' type='text/css'>
+    <meta name="theme-color" content="#00878f">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+    <script src="WebSocket.js" type="text/javascript"></script>
+    <script src="RaceControl.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <center>
+        <header>
+          <h1>Race Control</h1>
+          <div style="z-index: 1; position: absolute; top: 5px;"><img src="cog.png" onclick="setupApp();"/></div>
+          </header>
+        <div id="wait" style="z-index: 1; position: absolute; top: 5px; width: 75%; height: 100%; background-Color: white;">
+          <h1>
+            Please wait<br/>until all<br/>resources<br/>have loaded
+          </h1>
+      </div>
+        <div id="settings">
+          <table>
+            <tr><td colspan="2">Setup (optional) WiFi connection</td></tr>
+            <tr><td>SSID:</td><td><input id="ssid" type="text"/></td></tr>
+            <tr><td>Password:</td><td><input id="pwd" type="password"/></td></tr>
+            <tr><td>Reset to (re)connect</td><td id="wifistatus">Status: unknown</td></tr>
+            <tr><td colspan="2"><hr/></td></tr>
+            <tr><td colspan="2">Setup drivers names</td></tr>
+            <tr><td>Lane 1</td><td><input id="driver1" type="text"/></td></tr>
+            <tr><td>Lane 2</td><td><input id="driver2" type="text"/></td></tr>
+            <tr><td>Lane 3</td><td><input id="driver3" type="text"/></td></tr>
+            <tr><td>Lane 4</td><td><input id="driver4" type="text"/></td></tr>
+            <tr><td colspan="2"><hr/></td></tr>
+            <tr><td colspan="2">Setup number of laps</td></tr>
+            <tr><td>Laps:</td><td><input id="maxLaps" type="number" min="1" max="65530"/></td></tr>
+            <tr><td colspan="2"><hr/></td></tr>
+            <tr><td><button onclick="setupApp();">Cancel</button></td><td align="right"><button onclick="saveSettings();">Save</button>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+          </table>
+        </div>
+        <div id="jumpStart">
+          <h1 style="color: red;">
+            JUMPSTART!
+          </h1>
+          <p id="violator"></p>
+        </div>
+        <div id="startLights">
+          <span id="d1" class="dot"></span>
+          <span id="d2" class="dot"></span>
+          <span id="d3" class="dot"></span>
+          <span id="d4" class="dot"></span>
+          <span id="d5" class="dot"></span><br/>
+          <span id="d1a" class="dot"></span>
+          <span id="d2a" class="dot"></span>
+          <span id="d3a" class="dot"></span>
+          <span id="d4a" class="dot"></span>
+          <span id="d5a" class="dot"></span>
+        </div>
+        <div id="liveTrack">
+          <table id="liveTrackTable">
+            <tr><td>Fastest lap:</td><td id="fastestLap1"></td><td id="fastestLap2"></td></tr>
+            <tr><td colspan="2">Current lap:</td><td id="currentLap"></td></tr>
+            <tr><td>1</td><td id="live1"></td><td id="live11">pole</td></tr>
+            <tr><td>2</td><td id="live2"></td><td id="live12">+ 00:00.00</td></tr>
+            <tr><td>3</td><td id="live3"></td><td id="live13">+ 00:00.00</td></tr>
+            <tr><td>4</td><td id="live4"></td><td id="live14">+ 00:00.00</td></tr>
+          </table>
+        </div>
+        <div id="finishFlag">
+          <img src="finishflag.gif"/>
+          <h1 id="winner">Winner:</h1>
+      </div>
+        <div>
+            <p><button id="start" class="button" onclick="startPushed();">Start</button></p>
+            <div id="export"><p><button onclick="fnExcelReport();">Export to Excel</button></p></div>
+            <table id="lapTimes">
+              <tr id="topLine"><td>Lap No.</td><td></td><td></td><td></td><td></td>
+              </tr>
+            </table>
+        </div>
+        <div id="feedback">
+          <h2 id="c"></h2>
+        </div>
+    </center>
+</body>
+</html>
